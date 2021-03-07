@@ -100,7 +100,7 @@ export default {
       text: "",
       title: "",
       article: [],
-      dynamicTags: ["标签一", "标签二", "标签三"],
+      dynamicTags: [],
       inputVisible: false,
       inputValue: "",
     };
@@ -130,6 +130,7 @@ export default {
       if (this.title !== null && this.title !== "") {
         // alert("not empty")
         // 重复key直接覆盖
+        // console.log(this.dynamicTags)
         const len = this.article.length;
         // console.log();
         for (let i = 0; i < len; i++) {
@@ -144,9 +145,10 @@ export default {
         this.article.push({
           title: this.title,
           text: this.text,
+          tag: this.dynamicTags[0]
         });
       }
-      localStorage.setItem("article", JSON.stringify(this.article));
+      localStorage.setItem("params", JSON.stringify(this.article));
       // this.editor.txt.setJSON(json);
     },
     titleClick(v) {
@@ -198,8 +200,8 @@ export default {
     },
     // 同步文章
     syncNote() {
-      this.instance && this.instance.post('/api/hello',{
-        article: JSON.stringify(this.article)
+      this.instance && this.instance.post('/api/loginJSON',{
+        params: this.article
       })
       .then(function (response) {
           console.log(response)
