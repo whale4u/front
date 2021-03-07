@@ -144,7 +144,7 @@ export default {
         // if (arr.length > 0) alert('key duplicated!');
         this.article.push({
           title: this.title,
-          text: this.text,
+          content: this.text,
           tag: this.dynamicTags[0]
         });
       }
